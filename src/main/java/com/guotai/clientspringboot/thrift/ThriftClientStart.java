@@ -45,14 +45,7 @@ public class ThriftClientStart {
 
     public void clientStart() {
         try {
-//            Agent agent = new Agent();
-//            AgentProcess agentProcess = new AgentProcess();
-//            TFramedTransport transport = new TFramedTransport(new TSocket("localhost", 8888), 600);
-//            TCompactProtocol tCompactProtocol = new TCompactProtocol(transport);
-//            AgentService.Client client = new AgentService.Client(tCompactProtocol);
             List processList = getAgentInfoService.getProcess();
-//            transport.open();
-
             agent.setIp(getAgentInfoService.getIp());
             agent.setCpu_free(getAgentInfoService.getCPUInfo());
             agent.setMemory_free(getAgentInfoService.getMemInfo());
@@ -65,25 +58,16 @@ public class ThriftClientStart {
             agentProcess.setProcess_start_time(processList.get(2).toString());
             System.out.println("agent传输进程信息为：" + client.sendAgentProcessByIP(agentProcess.ip, agentProcess));
 
-
-
         } catch (Exception e) {
             e.printStackTrace();
-//            transport.close();
             throw new RuntimeException(e.getMessage(), e);
         }
     }
 
     public void agentCommandResBack(String msg) {
         try {
-            TFramedTransport transport = new TFramedTransport(new TSocket("localhost", 8888), 600);
-            TCompactProtocol tCompactProtocol = new TCompactProtocol(transport);
-            AgentService.Client client = new AgentService.Client(tCompactProtocol);
-            transport.open();
             // agent to server msg
             client.sendMsg(msg);
-            transport.close();
-
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e.getMessage(), e);

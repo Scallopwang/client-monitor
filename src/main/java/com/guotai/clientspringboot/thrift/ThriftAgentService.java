@@ -10,6 +10,7 @@ import org.apache.thrift.TException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import thriftmonitor.Agent;
+import thriftmonitor.AgentProcess;
 import thriftmonitor.AgentService;
 import thriftmonitor.DataException;
 
@@ -23,6 +24,11 @@ public class ThriftAgentService implements AgentService.Iface {
 
     @Override
     public Agent sendAgentByIP(String s, Agent agent) throws DataException, TException {
+        return null;
+    }
+
+    @Override
+    public AgentProcess sendAgentProcessByIP(String s, AgentProcess agentProcess) throws TException {
         return null;
     }
 
